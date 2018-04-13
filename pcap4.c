@@ -2,7 +2,7 @@
 #include <pcap.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
-#include <libnet.h>
+#include "libnet.h"
 
 
 void my_mac(uint8_t mac[]){
@@ -21,14 +21,14 @@ int main(int argc, char *argv[]) {
 		struct libnet_udp_hdr *udp;
 
 		const u_char *data;
-		char file[]= "httpGet.pcap";
+		char file[]= "lecture_http_header.pcap";
 		char *err;
 		char ip_buf[16];	
 
 		pcap_t *pcap = pcap_open_offline(file, err);
 		for(i=0;(data= pcap_next(pcap, &header))!=NULL;i++){
 			eth = (struct libnet_ethernet_hdr *) data;
-			printf("Pcaket No .%i\n",++pktCnt);
+			printf("\nPcaket No .%i\n",++pktCnt);
 			printf("Packet size : %d bytes\n",header.len);
 			
 			if((ntohs(eth->ether_type)) == ETHERTYPE_IP){		//IP
