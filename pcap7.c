@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
 	if ((pcap = pcap_open_live(	dev->name, 65536, 1, 1000, err)) == NULL){
 		fprintf(stderr, "\n%s open fail :( \n", dev->name);
 		pcap_freealldevs(alldevs);
+		return -1;
 	}
 
 	printf("\nListening on %s\n", dev->description);
@@ -109,20 +110,9 @@ int main(int argc, char *argv[]) {
 		if(res == 0) continue;
 		eth = (struct libnet_ethernet_hdr *) data;
 		if((ntohs(eth->ether_type)) == ETHERTYPE_ARP) {
-			//		printf("\nPcaket No .%i\n",++pktCnt);
-			//		printf("Packet size : %d bytes\n",header->len);
 			arp = (struct libnet_arp_hdr *)(data + sizeof(struct libnet_ethernet_hdr));
 			check_ip(p,ipCnt,arp->s_ip,arp->s_mac);
 			check_ip(p,ipCnt,arp->t_ip,arp->t_mac);
-			//		printf("HardWare Type : %04x\n",arp->ar_hrd);
-			//		printf("Protocol Type : %04x\n",arp->ar_pro);
-			//		printf("HardWare Size : %04x\n" ,arp->ar_hln);
-			//		printf("Protocol Size : %04x\n",arp->ar_pln);
-			//		printf("OpCode : %04x\n",arp->ar_op);
-			//		printf("Sender Mac : "); my_mac(arp->s_mac);
-			//		printf("Sender IP : "); my_ip(arp->s_ip);
-			//		printf("Target Mac : "); my_mac(arp->t_mac);
-			//		printf("Target IP : "); my_ip(arp->t_ip);
 		} 
 	}
 }
