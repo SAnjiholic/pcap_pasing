@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 			printf("Src Mac : "); my_mac(eth->ether_shost);
 	
 			printf("Src IP : %s\n",inet_ntop(AF_INET,&(ip->ip_src),ip_buf,sizeof(ip_buf)));
-			printf("Src IP : %s\n",inet_ntop(AF_INET,&(ip->ip_dst),ip_buf,sizeof(ip_buf)));
+			printf("Dst IP : %s\n",inet_ntop(AF_INET,&(ip->ip_dst),ip_buf,sizeof(ip_buf)));
 
 			if((ip->ip_p)== IPPROTO_UDP){				//UDP
 			udp =(struct libnet_udp_hdr *)(data +sizeof(struct libnet_ethernet_hdr)+sizeof(struct libnet_ipv4_hdr));

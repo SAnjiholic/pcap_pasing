@@ -222,9 +222,11 @@ struct libnet_arp_hdr
 #define ARPOP_INVREPLY   9  /* resp identifying peer */
     /* address information allocated dynamically */
 	uint8_t s_mac[6];
-	struct in_addr send_ip;
+	//struct in_addr send_ip;
+	uint8_t s_ip[4];
 	uint8_t t_mac[6];
-	struct in_addr target_ip;
+//	struct in_addr target_ip;
+	uint8_t t_ip[4];
 
 };
 
@@ -709,7 +711,9 @@ struct libnet_ipv4_hdr
     uint8_t ip_ttl;          /* time to live */
     uint8_t ip_p;            /* protocol */
     uint16_t ip_sum;         /* checksum */
-    struct in_addr ip_src, ip_dst; /* source and dest address */
+	uint8_t ip_src[4];
+	uint8_t ip_dst[4];
+	//    struct in_addr ip_src, ip_dst; /* source and dest address */
 };
 
 /*
